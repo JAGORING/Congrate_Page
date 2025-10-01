@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useWindowSize } from "react-use";
+import { useEffect, useState } from "react";
 
 const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
 
@@ -17,8 +18,13 @@ export default function ConfettiWrapper({
   colors,
 }: ConfettiWrapperProps) {
   const { width, height } = useWindowSize();
+  const [isMounted, setIsMounted] = useState(false);
 
-  if (!active) return null;
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!active || !isMounted) return null;
 
   return (
     <Confetti
