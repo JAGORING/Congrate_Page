@@ -4,17 +4,10 @@ import Section from "@/components/Section";
 import Image from "next/image";
 import AddBucketListModal from "@/components/AddBucketListModal";
 import ViewBucketListModal from "@/components/ViewBucketListModal";
-import { useBucketList } from "@/components/useBucketList";
-import { useDisclosure } from "@/components/useDisclosure";
+import { useBucketList } from "@/hooks/useBucketList";
+import type { BucketItem } from "@/types/bucket";
+import { useDisclosure } from "@/hooks/useDisclosure";
 import { useState } from "react";
-
-export interface BucketItem {
-  id: number;
-  text: string;
-  x: number;
-  y: number;
-  flower: string;
-}
 
 export default function BucketFieldSection() {
   const { bucketList, addItem } = useBucketList();
@@ -54,7 +47,7 @@ export default function BucketFieldSection() {
 
       <div className="absolute top-24 left-0 right-0 bottom-0 pt-8">
         <div className="relative w-full h-full">
-          {bucketList.map((item) => (
+          {bucketList.map((item: BucketItem) => (
             <button
               key={item.id}
               onClick={() => openViewModal({ id: item.id, text: item.text })}

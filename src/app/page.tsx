@@ -3,34 +3,20 @@
 import { useState } from "react";
 import Section from "@/components/Section";
 import BucketFieldSection from "@/components/BucketFieldSection";
+import { useConfetti } from "@/hooks/useConfetti";
 
 export default function Page() {
-  const [showIntroConfetti, setShowIntroConfetti] = useState(false);
-  const [showClickConfetti, setShowClickConfetti] = useState(false);
-  const [showEndingConfetti, setShowEndingConfetti] = useState(false);
-
-  const handleStartingEnter = () => {
-    setShowIntroConfetti(true);
-    const timer = setTimeout(() => setShowIntroConfetti(false), 4000);
-  };
-
-  const handleClickConfetti = () => {
-    setShowClickConfetti(true);
-    setTimeout(() => setShowClickConfetti(false), 4000);
-  };
-
-  const handleEndingEnter = () => {
-    setShowEndingConfetti(true);
-    setTimeout(() => setShowEndingConfetti(false), 5000);
-  };
+  const intro = useConfetti({ durationMs: 4000 });
+  const click = useConfetti({ durationMs: 4000 });
+  const ending = useConfetti({ durationMs: 5000 });
 
   return (
     <div className="w-screen h-screen snap-y snap-mandatory overflow-scroll">
       <Section
         bgClass="bg-gradient-to-b from-pink-500 to-purple-600"
-        activeConfetti={showIntroConfetti}
+        activeConfetti={intro.active}
         confettiPieces={300}
-        onMouseEnter={handleStartingEnter}
+        onMouseEnter={() => intro.start()}
       >
         <h1 className="text-white text-4xl font-bold text-center">
           🎉 드디어 시작이야! 🎉
@@ -39,13 +25,13 @@ export default function Page() {
 
       <Section
         bgClass="bg-gradient-to-b from-indigo-600 to-blue-400"
-        activeConfetti={showClickConfetti}
+        activeConfetti={click.active}
         confettiPieces={250}
       >
         <div className="flex flex-col items-center">
           <h2 className="text-white text-3xl font-semibold mb-6">너무 고생했어 👏</h2>
           <button
-            onClick={handleClickConfetti}
+            onClick={() => click.start()}
             className="px-6 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-lg hover:scale-105 transition"
           >
             축하 폭죽 발사! 🎇
@@ -57,10 +43,10 @@ export default function Page() {
 
       <Section
         bgClass="bg-gradient-to-b from-yellow-400 to-orange-500"
-        activeConfetti={showEndingConfetti}
+        activeConfetti={ending.active}
         confettiPieces={400}
         confettiColors={["#FFD700", "#FF0000", "#FFFFFF"]}
-        onMouseEnter={handleEndingEnter}
+        onMouseEnter={() => ending.start()}
       >
         <h2 className="text-white text-4xl font-bold text-center">
           ✨ 이제 진짜 새로운 시작이야 ✨

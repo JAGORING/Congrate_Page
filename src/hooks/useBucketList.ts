@@ -1,14 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-export interface BucketItem {
-  id: number;
-  text: string;
-  x: number;
-  y: number;
-  flower: string;
-}
+import type { BucketItem } from "@/types/bucket";
 
 const FLOWERS = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '🌿', '🍀', '🌱', '🌾', '🌵', '🌴'];
 const MIN_DISTANCE_PERCENT = 10;
@@ -70,5 +63,6 @@ export function useBucketList() {
 
   return { isMounted, bucketList, addItem };
 }
+
 
 
