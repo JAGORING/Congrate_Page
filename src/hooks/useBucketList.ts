@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { BucketItem } from "@/types/bucket";
+import { supabase } from "@/lib/supabaseClient";
 
 const FLOWERS = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '🌿', '🍀', '🌱', '🌾', '🌵', '🌴'];
 const MIN_DISTANCE_PERCENT = 10;
@@ -48,17 +49,40 @@ export function useBucketList() {
     setIsMounted(true);
   }, []);
 
-  const addItem = (text: string) => {
+  useEffect(() => {
+    const fetchItems = async () => {
+      if (!supabase) return;
+      const { data, error } = await supabase
+        .from("bucket_items")
+        .select("id, text, x, y, flower")
+      if (error) {
+        return setBucketList([]);
+      }
+      if (data) {
+        const items = data as unknown as BucketItem[];
+        setBucketList(items);
+      }
+    };
+    fetchItems();
+  }, []);
+
+  const addItem = async (text: string) => {
     if (!isMounted) return;
     const { x, y } = findNonOverlappingPosition(bucketList.map(({ x, y }) => ({ x, y })));
-    const newItem: BucketItem = {
-      id: Date.now(),
+    const payload = {
       text,
       x,
       y,
       flower: FLOWERS[Math.floor(Math.random() * FLOWERS.length)]
     };
-    setBucketList(prev => [...prev, newItem]);
+    if (!supabase) return; 
+    const { data, error } = await supabase
+      .from("bucket_items")
+      .insert(payload);
+      
+    if (!error && data) {
+      setBucketList(prev => [...prev, data as unknown as BucketItem]);
+    }
   };
 
   return { isMounted, bucketList, addItem };

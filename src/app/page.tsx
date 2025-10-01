@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Section from "@/components/Section";
 import BucketFieldSection from "@/components/BucketFieldSection";
 import { useConfetti } from "@/hooks/useConfetti";
