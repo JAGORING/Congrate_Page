@@ -24,13 +24,14 @@ export default function BucketFieldSection() {
     <Section
       bgClass="relative overflow-hidden"
     >
-      <div className="absolute inset-0 opacity-60">
+      <div className="absolute inset-0">
         <Image
           src="/images/field.jpg"
-          alt="field background"
+          alt="BucketField background"
           fill
           className="object-cover"
         />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       <div className="absolute top-0 left-0 right-0 h-24 flex items-center justify-between px-6 z-10">
