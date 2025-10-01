@@ -78,7 +78,8 @@ export function useBucketList() {
     if (!supabase) return; 
     const { data, error } = await supabase
       .from("bucket_items")
-      .insert(payload);
+      .insert(payload)
+      .select("id, text, x, y, flower");
       
     if (!error && data) {
       setBucketList(prev => [...prev, data as unknown as BucketItem]);

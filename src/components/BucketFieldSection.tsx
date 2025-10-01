@@ -48,9 +48,9 @@ export default function BucketFieldSection() {
 
       <div className="absolute top-24 left-0 right-0 bottom-0 pt-8">
         <div className="relative w-full h-full">
-          {bucketList.map((item: BucketItem) => (
+          {bucketList.map((item: BucketItem, idx: number) => (
             <button
-              key={item.id}
+              key={item.id ?? idx}
               onClick={() => openViewModal({ id: item.id, text: item.text })}
               className="absolute text-4xl hover:scale-110 transition-transform duration-200 cursor-pointer"
               style={{
