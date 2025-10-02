@@ -20,7 +20,7 @@ export default function Modal({ isOpen, onClose, title, children, footer, hideCl
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-xl font-bold text-center flex-1">{title}</h3>
             {!hideCloseButton && (
-              <button aria-label="close" onClick={onClose} className="absolute right-4 top-4 text-gray-400 hover:text-gray-600">
+              <button aria-label="close" onClick={onClose} className="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
                 ✕
               </button>
             )}
