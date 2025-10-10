@@ -16,7 +16,7 @@ interface CouponCardProps {
       B: "border-[3px] border-blue-400",
     };
   
-    return (
+  return (
       <motion.div
         initial={{ scale: 0.7, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}

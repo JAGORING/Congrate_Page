@@ -100,20 +100,14 @@ export default function LuckyDrawSection() {
     }
   };
 
+  const closeCard = () => setSelectedCoupon(null);
+
   return (
       <Section bgClass="flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 p-8" activeConfetti={confetti.active} confettiPieces={300}>
       <h2 className="text-3xl font-bold mb-6">🎁 랜덤 쿠폰 뽑기 🎁</h2>
 
       <AnimatePresence mode="wait">
-        {selectedCoupon ? (
-          <CouponCard
-            key={selectedCoupon.id}
-            coupon={selectedCoupon}
-            onRetry={() => setSelectedCoupon(null)}
-          />
-        ) : (
-          <DrawButton onClick={drawCoupon} disabled={loading} />
-        )}
+        <DrawButton onClick={drawCoupon} disabled={loading} />
       </AnimatePresence>
 
       <motion.div
@@ -153,6 +147,17 @@ export default function LuckyDrawSection() {
           <CouponTabs available={available} used={used} onToggleUse={setUsed} />
         )}
       </motion.div>
+
+      <AnimatePresence>
+        {selectedCoupon && (
+          <div className="fixed inset-0 z-50" onClick={closeCard}>
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="absolute inset-0 flex items-center justify-center p-4" onClick={closeCard}>
+              <CouponCard coupon={selectedCoupon} onRetry={closeCard} />
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
         {toast.visible && (
           <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/80 text-white text-sm px-4 py-2 rounded-full shadow-lg">
             {toast.message}
