@@ -5,63 +5,11 @@ import DrawButton from "./DrawButton";
 import CouponCard from "./CouponCard";
 import { motion, AnimatePresence } from "framer-motion";
 import Section from "./Section";
-import { Coupon, DrawHistory } from "@/types/coupon";
+import { Coupon } from "@/types/coupon";
 import { coupons } from "@/app/data/coupons";
 import { useDrawHistory } from "@/hooks/useDrawHistory";
-import Tabs from "@/components/Tabs";
-import { useState as _useState } from "react";
+import CouponTabs from "@/components/CouponTabs";
 import { useConfetti } from "@/hooks/useConfetti";
-
-function CouponTabs({ available, used, onToggleUse }: { available: DrawHistory[]; used: DrawHistory[]; onToggleUse: (id: string, used: boolean) => void }) {
-  const [active, setActive] = _useState("available");
-  const items = [
-    {
-      key: "available",
-      label: "사용가능",
-      content: (
-        <CouponList list={available} onToggleUse={onToggleUse} />
-      )
-    },
-    {
-      key: "used",
-      label: "사용완료",
-      content: (
-        <CouponList list={used} onToggleUse={onToggleUse} />
-      )
-    }
-  ];
-  return (
-    <div>
-      <div className="flex gap-2 mb-3">
-        <span className="text-sm text-gray-600">🎟️ 지금까지 {available.length + used.length}개 뽑음</span>
-      </div>
-      <Tabs items={items} activeKey={active} onChange={setActive} />
-    </div>
-  );
-}
-
-function CouponList({ list, onToggleUse }: { list: DrawHistory[]; onToggleUse: (id: string, used: boolean) => void }) {
-  return list.length > 0 ? (
-    <ul className="space-y-2 max-h-64 overflow-y-auto">
-      {list.map((h) => {
-        const c = coupons.find((cp) => cp.id === h.couponId);
-        return (
-          <li key={h.id} className="border rounded p-2 flex items-center justify-between">
-            <div>
-              <div className="font-semibold">{c?.title}</div>
-              <div className="text-xs text-gray-500">등급: {c?.tier}</div>
-            </div>
-            <button onClick={() => onToggleUse(h.id, !(h.used))} className={`text-sm px-2 py-1 rounded ${h.used ? "bg-gray-300" : "bg-green-500 text-white"}`}>
-              {h.used ? "되돌리기" : "사용하기"}
-            </button>
-          </li>
-        );
-      })}
-    </ul>
-  ) : (
-    <p className="text-gray-500">표시할 쿠폰이 없습니다.</p>
-  );
-}
 
 export default function LuckyDrawSection() {
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
