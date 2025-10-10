@@ -82,7 +82,10 @@ export function useBucketList() {
       .select("id, text, x, y, flower");
       
     if (!error && data) {
-      setBucketList(prev => [...prev, data as unknown as BucketItem]);
+      console.log('datadatadatadata   :: data', data);
+      console.log('datadatadatadata   :: error', error);
+      
+      setBucketList(prev => [...prev, ...data as unknown as BucketItem[]]);
     }
   };
 
