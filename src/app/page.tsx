@@ -3,6 +3,7 @@
 import Section from "@/components/Section";
 import BucketFieldSection from "@/components/BucketFieldSection";
 import { useConfetti } from "@/hooks/useConfetti";
+import LuckyDrawSection from "@/components/LuckyDrawSection";
 
 export default function Page() {
   const intro = useConfetti({ durationMs: 4000 });
@@ -37,7 +38,7 @@ export default function Page() {
           </button>
         </div>
       </Section>
-
+      <LuckyDrawSection />
       <BucketFieldSection />
 
       <Section
