@@ -9,6 +9,7 @@ import { Coupon } from "@/types/coupon";
 import { coupons } from "@/app/data/coupons";
 import { useDrawHistory } from "@/hooks/useDrawHistory";
 import CouponTabs from "@/components/CouponTabs";
+import { coupons as allCoupons } from "@/app/data/coupons";
 import { useConfetti } from "@/hooks/useConfetti";
 
 export default function LuckyDrawSection() {
@@ -49,6 +50,10 @@ export default function LuckyDrawSection() {
   };
 
   const closeCard = () => setSelectedCoupon(null);
+  const openCardById = (couponId: string) => {
+    const c = allCoupons.find(c => c.id === couponId) || null;
+    setSelectedCoupon(c);
+  };
 
   return (
       <Section bgClass="flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 p-8" activeConfetti={confetti.active} confettiPieces={300}>
@@ -92,7 +97,7 @@ export default function LuckyDrawSection() {
             <p className="text-gray-500">아직 뽑은 쿠폰이 없습니다.</p>
           )
         ) : (
-          <CouponTabs available={available} used={used} onToggleUse={setUsed} />
+          <CouponTabs available={available} used={used} onToggleUse={setUsed} onSelect={openCardById} />
         )}
       </motion.div>
 

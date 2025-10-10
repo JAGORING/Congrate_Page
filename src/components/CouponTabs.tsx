@@ -9,13 +9,14 @@ interface CouponTabsProps {
   available: DrawHistory[];
   used: DrawHistory[];
   onToggleUse: (id: string, used: boolean) => void;
+  onSelect?: (couponId: string) => void;
 }
 
-export default function CouponTabs({ available, used, onToggleUse }: CouponTabsProps) {
+export default function CouponTabs({ available, used, onToggleUse, onSelect }: CouponTabsProps) {
   const [active, setActive] = useState("available");
   const items = [
-    { key: "available", label: "사용가능", content: <CouponList list={available} onToggleUse={onToggleUse} /> },
-    { key: "used", label: "사용완료", content: <CouponList list={used} onToggleUse={onToggleUse} /> },
+    { key: "available", label: "사용가능", content: <CouponList list={available} onToggleUse={onToggleUse} onSelect={onSelect} /> },
+    { key: "used", label: "사용완료", content: <CouponList list={used} onToggleUse={onToggleUse} onSelect={onSelect} /> },
   ];
   return (
     <div>
