@@ -24,12 +24,19 @@ export function useDrawHistory() {
     fetchHistory();
   }, []);
 
-  const addDraw = async (couponId: string) => {
-    if (!supabase) return;
+  const addDraw = async (couponId: string): Promise<boolean> => {
+    if (!supabase) return false;
     setLoading(true);
-    await supabase.from("draw_history").insert({ couponId });
+    
+    const exists = history.some(h => h.couponId === couponId && !h.used);
+    if (exists) {
+      setLoading(false);
+      return false;
+    }
+    const { error } = await supabase.from("draw_history").insert({ couponId });
     await fetchHistory();
     setLoading(false);
+    return !error;
   };
 
   const setUsed = async (id: string, used: boolean) => {

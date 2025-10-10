@@ -4,13 +4,13 @@ import { useState } from "react";
 import DrawButton from "./DrawButton";
 import CouponCard from "./CouponCard";
 import { motion, AnimatePresence } from "framer-motion";
-import Confetti from "react-confetti";
 import Section from "./Section";
 import { Coupon, DrawHistory } from "@/types/coupon";
 import { coupons } from "@/app/data/coupons";
 import { useDrawHistory } from "@/hooks/useDrawHistory";
 import Tabs from "@/components/Tabs";
 import { useState as _useState } from "react";
+import { useConfetti } from "@/hooks/useConfetti";
 
 function CouponTabs({ available, used, onToggleUse }: { available: DrawHistory[]; used: DrawHistory[]; onToggleUse: (id: string, used: boolean) => void }) {
   const [active, setActive] = _useState("available");
@@ -66,26 +66,43 @@ function CouponList({ list, onToggleUse }: { list: DrawHistory[]; onToggleUse: (
 export default function LuckyDrawSection() {
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
   const { history: drawHistory, loading, addDraw, showHistory, setShowHistory, available, used, setUsed } = useDrawHistory();
-  const [showConfetti, setShowConfetti] = useState(false);
+  const confetti = useConfetti({ durationMs: 4000 });
+  const [toast, setToast] = useState<{ visible: boolean; message: string }>({ visible: false, message: "" });
+
+  const showToast = (message: string, durationMs = 2000) => {
+    setToast({ visible: true, message });
+    setTimeout(() => setToast({ visible: false, message: "" }), durationMs);
+  };
 
   const drawCoupon = async () => {
     if (loading || coupons.length === 0) return;
 
-    const total = coupons.reduce((acc, c) => acc + c.probability, 0);
+    const ownedIds = new Set(available.map(h => h.couponId));
+    const pool = coupons.filter(c => !ownedIds.has(c.id));
+    if (pool.length === 0) {
+      showToast("모든 쿠폰 얻기 완료🎈");
+      return;
+    }
+
+    const total = pool.reduce((acc, c) => acc + c.probability, 0);
     const random = Math.random() * total;
     let sum = 0;
-    const drawn = coupons.find((c) => (sum += c.probability) >= random)!;
+    const drawn = pool.find((c) => (sum += c.probability) >= random)!;
 
     setSelectedCoupon(drawn);
-    setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 4000);
-    await addDraw(drawn.id);
+    if (drawn.tier === "SR" || drawn.tier === "S") {
+      confetti.start();
+    }
+    const ok = await addDraw(drawn.id);
+    if (!ok) {
+      showToast("이미 보유 중인 쿠폰이야! 다시 한번 뽑아볼까나~?");
+      return;
+    }
   };
 
   return (
-    <Section bgClass="flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 p-8">
-      {showConfetti && <Confetti recycle={false} numberOfPieces={300} />}
-      <h2 className="text-3xl font-bold mb-6">🎁 랜덤 쿠폰 뽑기</h2>
+      <Section bgClass="flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 p-8" activeConfetti={confetti.active} confettiPieces={300}>
+      <h2 className="text-3xl font-bold mb-6">🎁 랜덤 쿠폰 뽑기 🎁</h2>
 
       <AnimatePresence mode="wait">
         {selectedCoupon ? (
@@ -136,6 +153,11 @@ export default function LuckyDrawSection() {
           <CouponTabs available={available} used={used} onToggleUse={setUsed} />
         )}
       </motion.div>
-    </Section>
+        {toast.visible && (
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black/80 text-white text-sm px-4 py-2 rounded-full shadow-lg">
+            {toast.message}
+          </div>
+        )}
+      </Section>
   );
 }
