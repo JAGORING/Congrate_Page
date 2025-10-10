@@ -26,7 +26,7 @@ export default function LuckyDrawSection() {
   const drawCoupon = async () => {
     if (loading || coupons.length === 0) return;
 
-    const ownedIds = new Set(available.map(h => h.couponId));
+    const ownedIds = new Set(drawHistory.map(h => h.couponId));
     const pool = coupons.filter(c => !ownedIds.has(c.id));
     if (pool.length === 0) {
       showToast("모든 쿠폰 얻기 완료🎈");
