@@ -6,13 +6,13 @@ import CouponCard from "./CouponCard";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
 import Section from "./Section";
-import { Coupon } from "@/types/coupon";
+import { Coupon, DrawHistory } from "@/types/coupon";
 import { coupons } from "@/app/data/coupons";
 import { useDrawHistory } from "@/hooks/useDrawHistory";
 import Tabs from "@/components/Tabs";
 import { useState as _useState } from "react";
 
-function CouponTabs({ available, used, onToggleUse }: { available: any[]; used: any[]; onToggleUse: (id: string, used: boolean) => void }) {
+function CouponTabs({ available, used, onToggleUse }: { available: DrawHistory[]; used: DrawHistory[]; onToggleUse: (id: string, used: boolean) => void }) {
   const [active, setActive] = _useState("available");
   const items = [
     {
@@ -40,10 +40,10 @@ function CouponTabs({ available, used, onToggleUse }: { available: any[]; used: 
   );
 }
 
-function CouponList({ list, onToggleUse }: { list: any[]; onToggleUse: (id: string, used: boolean) => void }) {
+function CouponList({ list, onToggleUse }: { list: DrawHistory[]; onToggleUse: (id: string, used: boolean) => void }) {
   return list.length > 0 ? (
     <ul className="space-y-2 max-h-64 overflow-y-auto">
-      {list.map((h: any) => {
+      {list.map((h) => {
         const c = coupons.find((cp) => cp.id === h.couponId);
         return (
           <li key={h.id} className="border rounded p-2 flex items-center justify-between">
