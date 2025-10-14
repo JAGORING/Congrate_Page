@@ -56,7 +56,7 @@ export default function LuckyDrawSection() {
   };
 
   return (
-      <Section bgClass="flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 p-8" activeConfetti={confetti.active} confettiPieces={300}>
+      <Section bgClass="flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100 p-8" activeConfetti={confetti.active} confettiPieces={300}>
       <h2 className="text-3xl font-bold mb-6">🎁 랜덤 쿠폰 뽑기 🎁</h2>
 
       <AnimatePresence mode="wait">

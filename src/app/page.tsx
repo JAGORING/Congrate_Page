@@ -4,6 +4,7 @@ import Section from "@/components/Section";
 import BucketFieldSection from "@/components/BucketFieldSection";
 import { useConfetti } from "@/hooks/useConfetti";
 import LuckyDrawSection from "@/components/LuckyDrawSection";
+import LetterSection from "@/components/LetterSection";
 
 export default function Page() {
   const intro = useConfetti({ durationMs: 4000 });
@@ -40,7 +41,7 @@ export default function Page() {
       </Section>
       <LuckyDrawSection />
       <BucketFieldSection />
-
+      <LetterSection />
       <Section
         bgClass="bg-gradient-to-b from-yellow-400 to-orange-500"
         activeConfetti={ending.active}

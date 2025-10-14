@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, RefObject } from "react";
 import ConfettiWrapper from "./ConfettiWrapper";
 
 interface SectionProps {
@@ -10,6 +10,7 @@ interface SectionProps {
   confettiPieces?: number;
   confettiColors?: string[];
   onMouseEnter?: () => void;
+  ref?: RefObject<HTMLDivElement | null>;
 }
 
 export default function Section({
@@ -19,9 +20,11 @@ export default function Section({
   confettiPieces,
   confettiColors,
   onMouseEnter,
+  ref
 }: SectionProps) {
   return (
     <section
+      ref={ref}
       className={`relative w-screen h-screen flex items-center justify-center snap-start ${bgClass}`}
       onMouseEnter={onMouseEnter}
     >
