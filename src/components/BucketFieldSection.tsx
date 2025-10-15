@@ -22,7 +22,7 @@ export default function BucketFieldSection() {
 
   return (
     <Section
-      bgClass="relative overflow-hidden"
+      bgClass="relative"
     >
       <div className="absolute inset-0">
         <Image
