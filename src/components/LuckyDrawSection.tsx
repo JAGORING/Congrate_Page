@@ -60,7 +60,7 @@ export default function LuckyDrawSection() {
       <h2 className="text-3xl font-bold mb-6">🎁 랜덤 쿠폰 뽑기 🎁</h2>
 
       <AnimatePresence mode="wait">
-        <DrawButton onClick={drawCoupon} disabled={loading} />
+        <DrawButton onClick={drawCoupon}  disabled={!!selectedCoupon}  />
       </AnimatePresence>
 
       <motion.div
