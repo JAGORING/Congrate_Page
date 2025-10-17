@@ -10,13 +10,20 @@ export default function LetterSection() {
   const [opened, setOpened] = useState(false);
   const [arrived, setArrived] = useState(false);
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           setArrived(true);
+        } else {
+          if (audioRef.current) {
+            audioRef.current.pause();
+            setIsMuted(true);
+          }
         }
       },
       { threshold: 0.6 }
@@ -30,11 +37,49 @@ export default function LetterSection() {
     setHasBeenOpened(true);
   };
 
+  const toggleMute = () => {
+    if (!audioRef.current) return;
+    if (isMuted) {
+      audioRef.current.play().catch(() => {});
+    } else {
+      audioRef.current.pause();
+    }
+    setIsMuted(!isMuted);
+  };
+
   return (
     <Section
       ref={sectionRef}
       bgClass="flex-col items-center justify-center bg-gradient-to-br from-amber-50 to-rose-100"
     >
+      <motion.button
+        onClick={toggleMute}
+        className="absolute top-5 right-5 p-3 bg-white/70 rounded-full shadow-md hover:bg-white transition flex items-center justify-center"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        animate={
+          !isMuted
+            ? { 
+                boxShadow: [
+                  "0 0 0px rgba(255,182,193,0.5)",
+                  "0 0 10px rgba(255,105,180,0.8)",
+                  "0 0 0px rgba(255,182,193,0.5)",
+                ],
+              }
+            : {}
+        }
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <motion.span
+          animate={!isMuted ? { rotate: [0, 10, -12, 0] } : {}}
+          transition={{ duration: 1.3, repeat: Infinity, ease: "easeInOut" }}
+          className="text-xl"
+        >
+          {isMuted ? "🔇" : "💖"}
+        </motion.span>
+      </motion.button>
+
+
       <AnimatePresence mode="wait">
         {!arrived && !hasBeenOpened && (
           <motion.div
@@ -84,6 +129,8 @@ export default function LetterSection() {
           </div>
         )}
       </AnimatePresence>
+
+      <audio ref={audioRef} src="/sounds/귀여운노래넣기.mp3" loop />
     </Section>
   );
 }

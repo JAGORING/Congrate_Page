@@ -23,6 +23,7 @@ export default function AddBucketListModal({ isOpen, onClose, onAdd }: AddBucket
       isOpen={isOpen}
       onClose={onClose}
       title="새로운 버킷리스트 추가🎈"
+      hideCloseButton
       footer={
         <div className="flex gap-3">
           <button onClick={onClose} className="flex-1 py-2 px-4 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition">취소</button>
