@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Section from "@/components/Section"; 
-import LetterEnvelope from "@/components/LetterEnvelope";
-import LetterContent from "@/components/LetterContent";
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Section from '@/components/Section';
+import LetterEnvelope from '@/components/LetterEnvelope';
+import LetterContent from '@/components/LetterContent';
 
 export default function LetterSection() {
   const [opened, setOpened] = useState(false);
@@ -39,11 +39,9 @@ export default function LetterSection() {
 
   const toggleMute = () => {
     if (!audioRef.current) return;
-    if (isMuted) {
-      audioRef.current.play().catch(() => {});
-    } else {
-      audioRef.current.pause();
-    }
+
+    isMuted ? audioRef.current.play() : audioRef.current.pause();
+
     setIsMuted(!isMuted);
   };
 
@@ -59,11 +57,11 @@ export default function LetterSection() {
         whileTap={{ scale: 0.9 }}
         animate={
           !isMuted
-            ? { 
+            ? {
                 boxShadow: [
-                  "0 0 0px rgba(255,182,193,0.5)",
-                  "0 0 10px rgba(255,105,180,0.8)",
-                  "0 0 0px rgba(255,182,193,0.5)",
+                  '0 0 0px rgba(255,182,193,0.5)',
+                  '0 0 10px rgba(255,105,180,0.8)',
+                  '0 0 0px rgba(255,182,193,0.5)',
                 ],
               }
             : {}
@@ -72,13 +70,12 @@ export default function LetterSection() {
       >
         <motion.span
           animate={!isMuted ? { rotate: [0, 10, -12, 0] } : {}}
-          transition={{ duration: 1.3, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 1.3, repeat: Infinity, ease: 'easeInOut' }}
           className="text-xl"
         >
-          {isMuted ? "🔇" : "💖"}
+          {isMuted ? '🔇' : '💖'}
         </motion.span>
       </motion.button>
-
 
       <AnimatePresence mode="wait">
         {!arrived && !hasBeenOpened && (
@@ -88,7 +85,7 @@ export default function LetterSection() {
             initial={{ scale: 0.2, y: -200, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ y: 200, opacity: 0, height: 0 }}
-            transition={{ duration: 1.8, type: "spring" }}
+            transition={{ duration: 1.8, type: 'spring' }}
           >
             <LetterEnvelope />
           </motion.div>
@@ -105,7 +102,7 @@ export default function LetterSection() {
           className="text-center"
         >
           <p className="text-xl font-semibold mb-4">
-            {hasBeenOpened ? "💌 편지를 다시 읽어보세요!" : "💌 편지가 도착했어요!"}
+            {hasBeenOpened ? '💌 편지를 다시 읽어보세요!' : '💌 편지가 도착했어요!'}
           </p>
           <button
             onClick={() => setOpened(true)}
@@ -120,17 +117,13 @@ export default function LetterSection() {
         {opened && (
           <div className="fixed inset-0 z-50" onClick={handleClose}>
             <div className="absolute inset-0 bg-black/60" />
-            <div
-              className="absolute inset-0 flex items-center justify-center p-4"
-              onClick={handleClose}
-            >
+            <div className="absolute inset-0 flex items-center justify-center p-4" onClick={handleClose}>
               <LetterContent key="letter-content" onClose={handleClose} />
             </div>
           </div>
         )}
       </AnimatePresence>
-
-      <audio ref={audioRef} src="/sounds/귀여운노래넣기.mp3" loop />
+      <audio ref={audioRef} src="/sounds/song.mp3" loop />
     </Section>
   );
 }
