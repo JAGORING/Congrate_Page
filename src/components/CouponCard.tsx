@@ -31,7 +31,7 @@ interface CouponCardProps {
           className="absolute inset-0 object-cover opacity-30"
         />
         <div className="z-10">
-          <h3 className="text-2xl font-bold">{coupon.tier} 쿠폰</h3>
+          <h3 className="text-xl font-bold">{coupon.tier} 쿠폰</h3>
           <p className="text-lg font-semibold mt-1">{coupon.title}</p>
           <p className="text-sm text-gray-600">{coupon.message}</p>
         </div>

@@ -19,7 +19,7 @@ export default function Page() {
         confettiPieces={300}
         onMouseEnter={() => intro.start()}
       >
-        <h1 className="text-white text-4xl font-bold text-center">
+        <h1 className="text-white text-2xl md:text-3xl font-bold text-center">
           🎉 드디어 시작이야! 🎉
         </h1>
       </Section>
@@ -30,10 +30,10 @@ export default function Page() {
         confettiPieces={250}
       >
         <div className="flex flex-col items-center">
-          <h2 className="text-white text-3xl font-semibold mb-6">너무 고생했어 👏</h2>
+          <h2 className="text-white text-xl md:text-2xl font-semibold mb-6">너무 고생했어 👏</h2>
           <button
             onClick={() => click.start()}
-            className="px-6 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-lg hover:scale-105 transition"
+            className="text-sm md:text-base px-6 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-lg hover:scale-105 transition"
           >
             축하 폭죽 발사! 🎇
           </button>
@@ -49,7 +49,7 @@ export default function Page() {
         confettiColors={["#FFD700", "#FF0000", "#FFFFFF"]}
         onMouseEnter={() => ending.start()}
       >
-        <h2 className="text-white text-4xl font-bold text-center">
+        <h2 className="text-white text-xl md:text-2xl font-bold text-center">
           ✨ 이제 진짜 새로운 시작이야 ✨
           <br />
           언제나 응원할게 💖

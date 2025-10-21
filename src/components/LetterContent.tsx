@@ -31,8 +31,8 @@ export default function LetterContent({ onClose }: LetterContentProps) {
         animate={{ rotateX: 0 }}
         transition={{ duration: 0.7, delay: 0.3 }}
       >
-        <h3 className="text-2xl font-bold mb-3">To. {recipient}</h3>
-        <p className="whitespace-pre-wrap text-gray-700 leading-relaxed text-[15px] custom-scrollbar">
+        <h3 className="text-xl font-bold mb-3">To. {recipient}</h3>
+        <p className="whitespace-pre-wrap text-gray-700 leading-relaxed text-sm custom-scrollbar">
           {letterText}
         </p>
       </motion.div>

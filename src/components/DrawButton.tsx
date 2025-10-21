@@ -12,7 +12,7 @@ export default function DrawButton({ onClick, disabled }: DrawButtonProps) {
       whileTap={{ scale: 0.9 }}
       disabled={disabled}
       onClick={onClick}
-      className="px-5 py-3 text-lg font-bold rounded-2xl bg-gradient-to-r from-pink-400 to-purple-500 text-white shadow-lg disabled:opacity-60"
+      className="text-base md:text-lg px-5 py-3 font-bold rounded-2xl bg-gradient-to-r from-pink-400 to-purple-500 text-white shadow-lg disabled:opacity-60"
     >
       쿠폰 뽑기 🎟️
     </motion.button>
