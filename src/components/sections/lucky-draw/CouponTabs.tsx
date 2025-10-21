@@ -1,9 +1,9 @@
 "use client";
 
-import Tabs from "@/components/Tabs";
+import Tabs from "@/components/common/Tabs";
 import { useState } from "react";
 import type { DrawHistory } from "@/types/coupon";
-import CouponList from "@/components/CouponList";
+import CouponList from "./CouponList";
 
 interface CouponTabsProps {
   available: DrawHistory[];

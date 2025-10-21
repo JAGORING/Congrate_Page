@@ -1,9 +1,9 @@
 "use client";
 
-import Section from "@/components/Section";
+import Section from "@/components/common/Section";
 import Image from "next/image";
-import AddBucketListModal from "@/components/AddBucketListModal";
-import ViewBucketListModal from "@/components/ViewBucketListModal";
+import AddBucketListModal from "@/components/sections/bucket/AddBucketListModal";
+import ViewBucketListModal from "@/components/sections/bucket/ViewBucketListModal";
 import { useBucketList } from "@/hooks/useBucketList";
 import type { BucketItem } from "@/types/bucket";
 import { useDisclosure } from "@/hooks/useDisclosure";

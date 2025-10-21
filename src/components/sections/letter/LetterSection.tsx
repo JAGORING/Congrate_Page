@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Section from '@/components/Section';
-import LetterEnvelope from '@/components/LetterEnvelope';
-import LetterContent from '@/components/LetterContent';
+import Section from '@/components/common/Section';
+import LetterEnvelope from '@/components/sections/letter/LetterEnvelope';
+import LetterContent from '@/components/sections/letter/LetterContent';
 
 export default function LetterSection() {
   const [opened, setOpened] = useState(false);

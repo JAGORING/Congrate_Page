@@ -1,10 +1,10 @@
 "use client";
 
-import Section from "@/components/Section";
-import BucketFieldSection from "@/components/BucketFieldSection";
+import Section from "@/components/common/Section";
+import BucketFieldSection from "@/components/sections/bucket/BucketFieldSection";
 import { useConfetti } from "@/hooks/useConfetti";
-import LuckyDrawSection from "@/components/LuckyDrawSection";
-import LetterSection from "@/components/LetterSection";
+import LuckyDrawSection from "@/components/sections/lucky-draw/LuckyDrawSection";
+import LetterSection from "@/components/sections/letter/LetterSection";
 
 export default function Page() {
   const intro = useConfetti({ durationMs: 4000 });

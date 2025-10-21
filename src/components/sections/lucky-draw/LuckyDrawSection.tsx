@@ -4,13 +4,13 @@ import { useState } from "react";
 import DrawButton from "./DrawButton";
 import CouponCard from "./CouponCard";
 import { motion, AnimatePresence } from "framer-motion";
-import Section from "./Section";
+import Section from "../../common/Section";
 import { Coupon } from "@/types/coupon";
 import { coupons } from "@/app/data/coupons";
 import { useDrawHistory } from "@/hooks/useDrawHistory";
-import CouponTabs from "@/components/CouponTabs";
 import { coupons as allCoupons } from "@/app/data/coupons";
 import { useConfetti } from "@/hooks/useConfetti";
+import CouponTabs from "./CouponTabs";
 
 export default function LuckyDrawSection() {
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
