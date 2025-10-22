@@ -22,3 +22,9 @@ export const letterText: string = `
   
   마지막으로 발의 붉은색은 신발이 아니라 진짜 발이 맞아.
   `;
+
+  export const typingLetter: string[] = [
+    '직장인이 된 쭌댕🥦✨',
+    '축하하는 마음을 잔뜩 담아서!',
+    '쭉 같이 놀고 싶은 마음을 담아 준비해봤어❤️',
+  ];
