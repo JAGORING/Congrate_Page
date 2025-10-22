@@ -1,22 +1,25 @@
-import { motion } from "framer-motion";
+'use client';
 
+import { motion } from "framer-motion";
+import { useMemo } from "react";
 interface PolaroidProps {
     item: { src: string; text: string;}
     itemIdx: number;
+    line: number;
   }
   
-  export default function Polaroid({ item, itemIdx }: PolaroidProps) {
-    const getRandomRotation = (index: number) => {
+  export default function Polaroid({ item, itemIdx, line }: PolaroidProps) {
+    const rotation = useMemo(() => {
         const rotations = [-5, -3, -1, 0, 1, 3, 5];
-        return rotations[index % rotations.length];
-      };
-      
+        const index = (itemIdx + line * 3) % rotations.length;
+        return rotations[index];
+      }, [itemIdx, line]);
     return (
         <motion.div
         key={item.text}
         className="relative z-10 w-[200px] sm:w-[180px] md:w-[220px] h-[240px] bg-white shadow-xl rounded-md transform origin-top transition-transform duration-300 hover:rotate-1 hover:scale-105"
         style={{
-            rotate: `${getRandomRotation(itemIdx + Math.floor(Math.random() * 10) * 5)}deg`,
+            transform: `rotate(${rotation}deg)`,
             marginTop: itemIdx % 2 === 0 ? "10px" : "0",
         }}
         whileHover={{ rotate: 0 }}

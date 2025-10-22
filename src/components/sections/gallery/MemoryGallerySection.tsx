@@ -106,7 +106,7 @@ export default function MemoryGallerySection() {
                 {items
                   .slice(line * 10, line * 10 + 10)
                   .map((item, i) => (
-                    <Polaroid key={i} item={item} itemIdx={i} />
+                    <Polaroid key={i} item={item} itemIdx={i} line={line}/>
                   ))}
               </div>
             ))}
