@@ -25,7 +25,7 @@ export default function Section({
   return (
     <section
       ref={ref}
-      className={`relative w-screen h-screen flex items-center justify-center snap-start overflow-hidden ${bgClass}`}
+      className={`relative w-screen h-[100dvh] flex items-center justify-center snap-start overflow-hidden ${bgClass}`}
       onMouseEnter={onMouseEnter}
     >
       <ConfettiWrapper

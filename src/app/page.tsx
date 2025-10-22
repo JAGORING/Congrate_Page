@@ -13,7 +13,7 @@ export default function Page() {
   const ending = useConfetti({ durationMs: 5000 });
 
   return (
-    <div className="w-screen h-screen snap-y snap-mandatory overflow-scroll">
+    <div className="w-screen h-[100dvh] snap-y snap-mandatory overflow-scroll">
       <Section
         bgClass="bg-gradient-to-b from-pink-500 to-purple-600"
         activeConfetti={intro.active}
