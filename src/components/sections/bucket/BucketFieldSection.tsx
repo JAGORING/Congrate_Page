@@ -35,9 +35,9 @@ export default function BucketFieldSection() {
       </div>
 
       <div className="absolute top-0 left-0 right-0 h-24 flex items-center justify-between px-6 z-10">
-        <h2 className="text-white text-xl md:text-2xl font-bold">
+        <h1 className="text-white text-2xl md:text-3xl font-bold">
           린댕이랑 준댕이가 해야할 것들❣️
-        </h2>
+        </h1>
         <button
           onClick={openAddModal}
           className="w-12 h-12 bg-pink-400 hover:bg-pink-500 text-white rounded-full shadow-lg flex items-center justify-center font-bold transition-all duration-200 hover:scale-110"
@@ -52,7 +52,7 @@ export default function BucketFieldSection() {
             <button
               key={item.id ?? idx}
               onClick={() => openViewModal({ id: item.id, text: item.text })}
-              className="absolute hover:scale-110 transition-transform duration-200 cursor-pointer"
+              className="absolute text-2xl md:text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200 cursor-pointer"
               style={{
                 left: `${item.x}%`,
                 top: `${item.y}%`,

@@ -88,15 +88,19 @@ export default function MemoryGallerySection() {
       <Section
         bgClass="relative bg-gradient-to-br from-white via-sky-50 to-sky-100 flex flex-col items-center justify-center"
       >
-        <h2 className="text-xl md:text-2xl font-bold mb-3 pt-3 text-sky-700 drop-shadow-sm">
+        <h1 className="text-2xl md:text-3xl font-bold mb-3 md:mb-6 pt-3 text-sky-700 drop-shadow-sm">
           ☁️ 추억 전시관
-        </h2>
+        </h1>
   
         <div
           ref={scrollRef}
-          className="w-full max-w-[1200px] overflow-x-auto overflow-y-visible snap-x snap-mandatory px-6 pb-6"
+          className="w-full max-w-[1200px] overflow-x-auto overflow-y-visible snap-x snap-mandatory px-6 pt-3 pb-6 rounded-3xl 
+    border border-gray-200/30
+    shadow-[0_4px_20px_rgba(0,0,0,0.05)]
+    backdrop-blur-[2px]
+    bg-white/30"
         >
-          <div className="flex flex-col gap-16 min-w-max overflow-visible py-3">
+          <div className="flex flex-col gap-8 md:gap-16 min-w-max overflow-visible py-3">
             {[0, 1].map((line) => (
               <div
                 key={line}
@@ -113,7 +117,7 @@ export default function MemoryGallerySection() {
           </div>
         </div>
   
-        <p className="mt-3 text-sm text-sky-600 italic">
+        <p className="mt-3 md:mt-8 text-sm text-sky-600 italic">
           (마우스 휠을 움직여 추억을 넘겨보세요 🌈)
         </p>
       </Section>

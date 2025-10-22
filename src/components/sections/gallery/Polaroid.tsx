@@ -17,7 +17,15 @@ interface PolaroidProps {
     return (
         <motion.div
         key={item.text}
-        className="relative z-10 w-[200px] sm:w-[180px] md:w-[220px] h-[240px] bg-white shadow-xl rounded-md transform origin-top transition-transform duration-300 hover:rotate-1 hover:scale-105"
+        className="relative z-10
+        w-[45vw] max-w-[180px] sm:w-[35vw] sm:max-w-[200px] md:w-[220px]
+        aspect-[3/4]
+        bg-white
+        shadow-xl rounded-md
+        transform origin-top
+        transition-transform duration-300
+        hover:rotate-1 hover:scale-105
+        flex flex-col"
         style={{
             transform: `rotate(${rotation}deg)`,
             marginTop: itemIdx % 2 === 0 ? "10px" : "0",

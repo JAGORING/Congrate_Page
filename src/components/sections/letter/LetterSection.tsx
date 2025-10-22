@@ -101,7 +101,7 @@ export default function LetterSection() {
           transition={{ delay: 0.5 }}
           className="text-center"
         >
-          <p className="text-xl font-semibold mb-4">
+          <p className="text-xl md:text-2xl font-semibold mb-4">
             {hasBeenOpened ? '💌 편지를 다시 읽어보세요!' : '💌 편지가 도착했어요!'}
           </p>
           <button
