@@ -10,7 +10,6 @@ import TypingSection from "@/components/sections/typing/TypingSection";
 
 export default function Page() {
   const intro = useConfetti({ durationMs: 4000 });
-  const click = useConfetti({ durationMs: 4000 });
   const ending = useConfetti({ durationMs: 5000 });
 
   return (

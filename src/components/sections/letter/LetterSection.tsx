@@ -11,8 +11,8 @@ export default function LetterSection() {
   const [arrived, setArrived] = useState(false);
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const sectionRef = useRef<HTMLDivElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

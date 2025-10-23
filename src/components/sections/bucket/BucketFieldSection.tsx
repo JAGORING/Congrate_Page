@@ -35,7 +35,7 @@ export default function BucketFieldSection() {
       </div>
 
       <div className="absolute top-0 left-0 right-0 h-24 flex items-center justify-between px-6 z-10">
-        <h1 className="text-white text-2xl md:text-3xl font-bold">
+        <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-bold">
           린댕이랑 준댕이가 해야할 것들❣️
         </h1>
         <button
