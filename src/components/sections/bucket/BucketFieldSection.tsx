@@ -52,7 +52,7 @@ export default function BucketFieldSection() {
             <button
               key={item.id ?? idx}
               onClick={() => openViewModal({ id: item.id, text: item.text })}
-              className="absolute text-2xl md:text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200 cursor-pointer"
+              className="absolute text-3xl lg:text-4xl hover:scale-110 transition-transform duration-200 cursor-pointer"
               style={{
                 left: `${item.x}%`,
                 top: `${item.y}%`,
