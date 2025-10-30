@@ -1,46 +1,72 @@
-import { Coupon } from "@/types/coupon";
 import { motion } from "framer-motion";
-import { RotateCcw } from "lucide-react";
-import Image from "next/image";
+import { useMemo } from "react";
 
 interface CouponCardProps {
-    coupon: Coupon;
-    onRetry: () => void;
-  }
+  coupon: {
+    tier: "SR" | "S" | "A" | "B";
+    title: string;
+    message: string;
+  };
+  onRetry: () => void;
+}
 
-  export default function CouponCard({ coupon, onRetry }: CouponCardProps) {
-    const borderColors = {
-      SR: "border-[3px] border-transparent bg-gradient-to-r from-pink-300 via-purple-400 to-cyan-400 bg-clip-border",
-      S: "border-[3px] border-yellow-400",
-      A: "border-[3px] border-gray-400",
-      B: "border-[3px] border-blue-400",
-    };
-  
+export default function CouponCard({ coupon, onRetry }: CouponCardProps) {
+  const tierPalettes = {
+    SR: ["#fbcfe8", "#c084fc", "#67e8f9"],
+    S: ["#fef3c7", "#fde68a", "#fcd34d"],
+    A: ["#e5e7eb", "#d1d5db", "#f3f4f6"],
+    B: ["#bae6fd", "#7dd3fc", "#99f6e4"],
+  };
+
+  const background = useMemo(() => {
+    const colors = tierPalettes[coupon.tier];
+    const shuffled = [...colors].sort(() => Math.random() - 0.5);
+    const angle = Math.floor(Math.random() * 360);
+    return `linear-gradient(${angle}deg, ${shuffled[0]}, ${shuffled[1]}, ${shuffled[2]})`;
+  }, [coupon.tier]);
+
+  const borderColors = {
+    SR: "from-pink-200 via-purple-200 to-cyan-200",
+    S: "from-yellow-200 to-orange-200",
+    A: "from-gray-200 to-gray-300",
+    B: "from-blue-200 to-teal-200",
+  };
+
+  const textColors = {
+    SR: "text-[#faf5ff]",
+    S: "text-[#fef9c3]", 
+    A: "text-[#f9fafb]", 
+    B: "text-[#ecfeff]", 
+  };
+
   return (
-      <motion.div
-        initial={{ scale: 0.7, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", duration: 0.6 }}
-        className={`relative w-80 h-52 rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center bg-white shadow-xl ${borderColors[coupon.tier]}`}
+    <motion.div
+      initial={{ scale: 0.7, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ type: "spring", duration: 0.6 }}
+      className={`relative w-80 h-52 rounded-3xl overflow-hidden flex flex-col items-center justify-center text-center shadow-lg border-[2px] bg-gradient-to-r ${borderColors[coupon.tier]} p-[1.5px]`}
+    >
+      <div
+        className="relative w-full h-full rounded-[1.4rem] flex flex-col items-center justify-center overflow-hidden"
+        style={{ background }}
       >
-        <Image
-          fill
-          sizes="100%"
-          src={coupon.image}
-          alt={coupon.title}
-          className="absolute inset-0 object-cover opacity-30"
-        />
-        <div className="z-10">
-          <h3 className="text-xl font-bold">{coupon.tier} 쿠폰</h3>
-          <p className="text-lg font-semibold mt-1">{coupon.title}</p>
-          <p className="text-sm text-gray-600">{coupon.message}</p>
+        <div className="absolute inset-0 bg-white/15 mix-blend-overlay" />
+
+        <div className={`z-10 text-center px-4 drop-shadow-sm ${textColors[coupon.tier]}`}>
+          <h3 className="text-xl font-bold tracking-wide mb-1 opacity-90">
+            {coupon.tier} 쿠폰
+          </h3>
+          <p className="text-lg font-semibold opacity-95">{coupon.title}</p>
+          <p className="text-sm mt-1 opacity-80">{coupon.message}</p>
         </div>
+
         <button
           onClick={onRetry}
-          className="absolute bottom-2 right-2 p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition"
+          className="absolute bottom-2 right-2 p-2 rounded-full bg-white/70 hover:bg-white transition"
         >
-          <RotateCcw size={18} />
+          ❤️
         </button>
-      </motion.div>
-    );
-  }
+      </div>
+    </motion.div>
+  );
+}
