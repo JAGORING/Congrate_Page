@@ -1,11 +1,19 @@
-import { items } from "@/app/data/gallery";
 import Section from "@/components/common/Section";
 import Polaroid from "./Polaroid";
 import { useEffect, useRef } from "react";
 
 export default function MemoryGallerySection() {
     const scrollRef = useRef<HTMLDivElement>(null);
-  
+
+    const imgs = Array.from({ length: 34 }).map((_, i) => ({
+        src: `/images/gallery/img${i + 1}.webp`,
+        text: `추억 ${i + 1}`,
+      }));
+
+      const totalLines = 2;
+      const itemsPerLine = Math.ceil(imgs.length / totalLines);
+
+
     useEffect(() => {
       const container = scrollRef.current;
       if (!container) return;
@@ -40,18 +48,15 @@ export default function MemoryGallerySection() {
     bg-white/30"
         >
           <div className="flex flex-col gap-8 md:gap-16 min-w-max overflow-visible py-3">
-            {[0, 1].map((line) => (
-              <div
-                key={line}
-                className="flex gap-10 justify-start min-w-max relative"
-              >
-                <div className="absolute top-0 left-0 w-full h-[2px] bg-sky-100 z-0" />
-                {items
-                  .slice(line * 10, line * 10 + 10)
-                  .map((item, i) => (
-                    <Polaroid key={i} item={item} itemIdx={i} line={line}/>
-                  ))}
-              </div>
+            {Array.from({ length: totalLines }).map((_, line) => (
+                <div key={line} className="flex gap-10 justify-start min-w-max relative">
+                 <div className="absolute top-0 left-0 w-full h-[2px] bg-sky-100 z-0" />
+                {imgs
+                .slice(line * itemsPerLine, (line + 1) * itemsPerLine)
+                .map((img, i) => (
+                <Polaroid key={i} item={img} itemIdx={i} line={line} />
+                ))}
+            </div>
             ))}
           </div>
         </div>

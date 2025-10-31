@@ -36,6 +36,7 @@ interface PolaroidProps {
         <img
           src={item.src}
           alt={`❤️ ${item.text}`}
+          loading={itemIdx >= 10 ? "lazy" : "eager"}
           className="w-full h-full object-cover rounded-md border-4 border-white"
         />
       </motion.div>
