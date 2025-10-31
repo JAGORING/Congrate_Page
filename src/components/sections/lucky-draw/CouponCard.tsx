@@ -14,8 +14,8 @@ export default function CouponCard({ coupon, onRetry }: CouponCardProps) {
   const tierPalettes = {
     SR: ["#fbcfe8", "#c084fc", "#67e8f9"],
     S: ["#fef3c7", "#fde68a", "#fcd34d"],
-    A: ["#e5e7eb", "#d1d5db", "#f3f4f6"],
-    B: ["#bae6fd", "#7dd3fc", "#99f6e4"],
+    A: ["#bae6fd", "#7dd3fc", "#99f6e4"],
+    B: ["#e5e7eb", "#d1d5db", "#f3f4f6"],
   };
 
   const background = useMemo(() => {
@@ -26,17 +26,17 @@ export default function CouponCard({ coupon, onRetry }: CouponCardProps) {
   }, [coupon.tier]);
 
   const borderColors = {
-    SR: "from-pink-200 via-purple-200 to-cyan-200",
-    S: "from-yellow-200 to-orange-200",
-    A: "from-gray-200 to-gray-300",
-    B: "from-blue-200 to-teal-200",
+    SR: "border-pink-200",
+    S: "border-yellow-200",
+    A: "border-sky-200",
+    B: "border-gray-300",
   };
 
   const textColors = {
-    SR: "text-[#faf5ff]",
-    S: "text-[#fef9c3]", 
-    A: "text-[#f9fafb]", 
-    B: "text-[#ecfeff]", 
+    SR: "text-[#3d2a3d]",
+    S: "text-[#4a3a1e]", 
+    A: "text-[#1e3a5f]", 
+    B: "text-[#374151]", 
   };
 
   return (

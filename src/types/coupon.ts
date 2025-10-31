@@ -5,7 +5,6 @@ export interface Coupon {
   tier: Tier;         
   title: string;      
   message: string;    
-  image: string;     
   probability: number;
 }
 
