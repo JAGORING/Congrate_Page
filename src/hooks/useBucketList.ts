@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { BucketItem } from "@/types/bucket";
 import { supabase } from "@/lib/supabaseClient";
 
-const FLOWERS = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '🌿', '🍀', '🌱', '🌾', '🌵', '🌴'];
+const FLOWERS = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '🌿', '🍀', '🌱', ];
 const MIN_DISTANCE_PERCENT = 10;
 
 function generateRandomPosition() {

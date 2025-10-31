@@ -19,7 +19,7 @@ export default function ViewBucketListModal({ isOpen, onClose, item }: ViewBucke
           onClick={onClose}
           className="w-full py-2 px-4 bg-pink-400 text-white rounded-lg hover:bg-pink-500 transition"
         >
-          닫기
+          🤍
         </button>
       }
     >
