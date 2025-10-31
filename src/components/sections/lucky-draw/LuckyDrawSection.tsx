@@ -11,13 +11,17 @@ import { useDrawHistory } from "@/hooks/useDrawHistory";
 import { coupons as allCoupons } from "@/app/data/coupons";
 import { useConfetti } from "@/hooks/useConfetti";
 import CouponTabs from "./CouponTabs";
+import { useDisclosure } from "@/hooks/useDisclosure";
+import ConfirmModal from "./ConfirmModal";
 
 export default function LuckyDrawSection() {
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
   const { history: drawHistory, loading, addDraw, showHistory, setShowHistory, available, used, setUsed } = useDrawHistory();
   const confetti = useConfetti({ durationMs: 4000 });
   const [toast, setToast] = useState<{ visible: boolean; message: string }>({ visible: false, message: "" });
-
+  const confirmModal = useDisclosure();
+  const [pendingAction, setPendingAction] = useState<(() => Promise<void>) | null>(null);
+  
   const showToast = (message: string, durationMs = 2000) => {
     setToast({ visible: true, message });
     setTimeout(() => setToast({ visible: false, message: "" }), durationMs);
@@ -53,6 +57,22 @@ export default function LuckyDrawSection() {
   const openCardById = (couponId: string) => {
     const c = allCoupons.find(c => c.id === couponId) || null;
     setSelectedCoupon(c);
+  };
+
+  const correctPassword = "180317"; // 가볍게 확인만 하는 용도니까~
+
+  const handleConfirm = async () => {
+    if (pendingAction) {
+      await pendingAction();
+      setPendingAction(null);
+    }
+  };
+
+  const handleUseClick = (id: string, currentUsed: boolean) => {
+    setPendingAction(() => async () => {
+      await setUsed(id, currentUsed);
+    });
+    confirmModal.open();
   };
 
   return (
@@ -97,9 +117,19 @@ export default function LuckyDrawSection() {
             <p className="text-gray-500">아직 뽑은 쿠폰이 없습니다.</p>
           )
         ) : (
-          <CouponTabs available={available} used={used} onToggleUse={setUsed} onSelect={openCardById} />
+          <CouponTabs available={available} used={used} onToggleUse={(id, used) => handleUseClick(id, used)} onSelect={openCardById} />
         )}
       </motion.div>
+
+      <ConfirmModal
+        isOpen={confirmModal.isOpen}
+        onClose={() => {
+          confirmModal.close();
+          setPendingAction(null);
+        }}
+        onConfirm={handleConfirm}
+        correctPassword={correctPassword}
+      />
 
       <AnimatePresence>
         {selectedCoupon && (
